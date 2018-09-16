@@ -9,7 +9,7 @@ delta = [1 2 7 4];
 delta1 = [1 2 8];
 delta2 = [1 -4];
 delta3 = [-3 -4];
-T = 4.59;           % время переходного процесса
+T = 4.59;           % Transient response time
 
 % Analytical calculate, display data and create plots
 figure; grid on; hold on;
