@@ -1,6 +1,7 @@
 clear; close all; clc;
 
 % Input data variant12
+global A B
 A = [0 1 0; 1 0 2; -3 -4 -2];
 B = [1 0 0];
 
@@ -9,6 +10,7 @@ delta = [1 2 7 4];
 delta1 = [1 2 8];
 delta2 = [1 -4];
 delta3 = [-3 -4];
+global T
 T = 4.59;           % Transient response time
 
 % Analytical calculate, display data and create plots
@@ -52,3 +54,33 @@ legend('analytical x1', 'analytical x2', 'analytical x3', ...
        'ode23s x1', 'ode23s x2', 'ode23s x3', ...
        'ode45 x1', 'ode45 x2', 'ode45 x3', ...
        'eiler x1', 'eiler x2', 'eiler x3')
+
+% Analysis of the influence of solver config
+figure;
+create_analytical_function_graph();
+options = odeset();
+create_graph_for_options_and_show_analysis(options);
+title("default")
+
+figure;
+create_analytical_function_graph();
+create_graph_for_options_and_show_analysis(odeset('AbsTol', 1e-7, 'RelTol', 1e-7, 'MaxStep',1e+0));
+title("'AbsTol', 1e-7, 'RelTol', 1e-7, 'MaxStep',1e+0")
+
+figure;
+create_analytical_function_graph();
+create_graph_for_options_and_show_analysis(odeset('AbsTol', 1e-1, 'RelTol', 1e-1, 'MaxStep',1e+0));
+title("'AbsTol', 1e-1, 'RelTol', 1e-1, 'MaxStep',1e+0")
+
+figure;
+create_analytical_function_graph();
+create_graph_for_options_and_show_analysis(odeset('AbsTol', 1e+1, 'RelTol', 1e+1, 'MaxStep',1e+0));
+title("'AbsTol', 1e+1, 'RelTol', 1e+1, 'MaxStep',1e+0")
+
+%Analysis of the influence of the integration step
+figure;
+create_analytical_function_graph()
+create_eiler_graph_with_step_and_show_analysis(0.001)
+create_eiler_graph_with_step_and_show_analysis(0.01)
+create_eiler_graph_with_step_and_show_analysis(0.05)
+grid on;
