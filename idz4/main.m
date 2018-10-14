@@ -1,0 +1,23 @@
+clear; close all; clc;
+
+global A B X_START X_END TIME_END
+X_START = [1 0];
+X_END = [0 0]; 
+TIME_END = 2;
+A = [-1 2; 0 -1];
+B = [1 1];
+
+% Numerical solution:
+ksi0 = [1 1];
+fminsearch('calculate_error', ksi0)
+
+% Analytical solution:
+S = dsolve('Dx1=-x1+2*x2+0.5*ksi1+0.5*ksi2', ...
+           'Dx2 = -x2 + 0.5*ksi1+ 0.5*ksi2', ...
+           'Dksi1 = ksi1', ...
+           'Dksi2 = -2*ksi1 + ksi2', ...
+           'x1(0) = 1', ...
+           'x2(0) = 0', ...
+           'x1(2) = 0', ...
+           'x2(2) = 0');
+S.x1, S.x2, S.ksi1, S.ksi2
