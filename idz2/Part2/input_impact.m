@@ -1,9 +1,9 @@
-% input_impact.m - u(t) function
-function f = input_inpact(t)
-global t0, global t1, global t2, global U
+function f = input_impact(t)
+global t_start t_top t_end U
+f = zeros(1, length(t));
 for count = 1:length(t)
-    f(count) = Heaviside(t(count),t0) * t(count) * U/t1 + ...
-             + Heaviside(t(count),t1) * (t(count) - t1) * (-U/t1 - U/(t2-t1));
+    f(count) = Heaviside(t(count),t_start) * t(count) * U/t_top + ...
+             + Heaviside(t(count),t_top) * (t(count) - t_top) * (-U/t_top - U/(t_end-t_top));
 end
 end
 
