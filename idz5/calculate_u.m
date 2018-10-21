@@ -1,6 +1,10 @@
-function u = calculate_u(ksi)
-global B
+function u = calculate_u(t)
+global t_switch
 Um = 1;
-u = Um*sign(ksi(:,1).*B(1) + ksi(:,2).*B(2));
+if t < t_switch
+    u = -Um;
+else
+    u = Um;
+end
 end
 
