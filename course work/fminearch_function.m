@@ -17,12 +17,15 @@ transitionTime = calculate_transition_time(t, x);
 fprintf("w0 = %f, t = %f, k = [%f, %f, %f, %f]\n", w0, transitionTime, K);
 
 % Step 4. Show graphs:
-subplot(2, 1, 1); plot(t, x(:, 1:4)); 
+subplot(2, 1, 1); plot(t, x(:, 1:4)); grid on;
 legend('омега - угловая скорость рысканья', ...
        'бетта - угол дрейфа', ...
        'фи - угол рысканья', ...
        'дельта - угол перекладки руля')
-subplot(2, 1, 2); plot(t, control_impact(x'))
+title('ПП угловой скорости рысканья, угла дрейфа, угла рысканья и угла перекладки руля')
+subplot(2, 1, 2); plot(t, control_impact(x')); grid on;
+title('Переходные процессы управляющего воздействия')
+
 pause(0.1)
 end
 
