@@ -12,7 +12,7 @@ inverseOdefunWithPositiveU  = @(t, x) -[x(2); -(d^2 + w^2)*x(1) - 2*d*x(2) + 1];
 
 % Строим пустой график
 figure;
-subplot(1, 1, 1); hold on; grid on
+subplot(1, 1, 1); hold on; grid on; xlabel('x1'); ylabel('x2')
 title('Фазовая траектория оптимального процесса')
 
 % Фрагмент линий переключения первого порядка
@@ -40,10 +40,11 @@ end
 plot(secondArr(:, 1), secondArr(:,2), 'b--')
 plot(thirdArr(:, 1), thirdArr(:,2), 'r--')
 
+% Create result graph
 global t1 t2 t3 t_end
-t1 = 0.47*halfPeriod;
-t2 = t1 + halfPeriod;
-t3 = t2 + halfPeriod;
+t1 = 0.47*halfPeriod
+t2 = t1 + halfPeriod
+t3 = t2 + halfPeriod
 t_end = t3 + 0.2*halfPeriod
 [t, x] = ode23s('directOdefunWithFirstPositiveU', [0 t1], x0);
 plot(x(:, 1), x(:,2), 'k')
@@ -54,3 +55,25 @@ plot(x(:, 1), x(:,2), 'b')
 [t, x] = ode23s('directOdefunWithFirstPositiveU', [t3 t_end], [x(end, 1), x(end,2)]);
 plot(x(:, 1), x(:,2), 'g')
 
+% Create transition process graph
+figure;
+[t, x] = ode23s('directOdefunWithFirstPositiveU', [0 t_end], x0);
+subplot(2, 1, 1); plot(t, x); grid on; xlabel('t'); ylabel('x1(t), x2(t)')
+title('Графики переходных процессов x1(t) и x2(t)')
+
+u = size(length(t), 1);
+for i = 1:length(t)
+    if t(i) < t1
+        u(i) = -1;
+    elseif t(i) < t2
+        u(i) = +1;
+    elseif t(i) < t3
+        u(i) = -1;
+    elseif t(i) < t_end
+        u(i) = +1;
+    else
+        u(i) = 0;
+    end
+end
+subplot(2, 1, 2); plot(t, u, 'LineWidth', 3); grid on;
+title('График переходного процесса u(t)'); xlabel('t'); ylabel('u(t)')
