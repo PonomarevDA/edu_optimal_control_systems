@@ -6,7 +6,7 @@ function transitionTime = fminearch_function(w0)
 % Step 1. Define global variable and some constans:
 global K
 x0 = [0 0 10 0];
-maxTransitionTime = 30;
+maxTransitionTime = 40;
 
 % Step 2. Calculate data for system and graph:
 calculate_system_parameters(w0);
@@ -17,14 +17,16 @@ transitionTime = calculate_transition_time(t, x);
 fprintf("w0 = %f, t = %f, k = [%f, %f, %f, %f]\n", w0, transitionTime, K);
 
 % Step 4. Show graphs:
-subplot(2, 1, 1); plot(t, x(:, 1:4)); grid on;
+subplot(3, 1, 1); plot(t, x(:, 1:4)); grid on;
 legend('омега - угловая скорость рысканья', ...
        'бетта - угол дрейфа', ...
        'фи - угол рысканья', ...
        'дельта - угол перекладки руля')
 title('ПП угловой скорости рысканья, угла дрейфа, угла рысканья и угла перекладки руля')
-subplot(2, 1, 2); plot(t, control_impact(x')); grid on;
+subplot(3, 1, 2); plot(t, control_impact(x')); grid on;
 title('Переходные процессы управляющего воздействия')
+subplot(3, 1, 3); plot(t, x(:,4)); grid on;
+title('Переходные процессы угла руля')
 
 pause(0.1)
 end
