@@ -1,5 +1,5 @@
 function discrepancy = fmsfun(switchingTimesArray)
-global t1 t2 T x x_start x_end
+global t1 t2 T t x x_start x_end
 t1 = switchingTimesArray(1); t2 = switchingTimesArray(2) ; T = switchingTimesArray(3);
 [t,x]=ode45('odefun',[0 T], x_start);
 discrepancy = (x(end,1)-x_end(1))^2 + (x(end,2)-x_end(2))^2 + (x(end,3)-x_end(3))^2;

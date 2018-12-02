@@ -1,7 +1,7 @@
 clc; clear; close all;
 
 % Init data:
-global A B t1 t2 T x x_start x_end
+global A B t1 t2 t T x x_start x_end
 x_start = [0 0 10];
 x_end = [0 0 0];
 t0 = 0;
@@ -36,3 +36,4 @@ figure; grid on;
 [Time, fval] = fminsearch('fmsfun', [t1 t2 T]);
 fprintf("Specify combination of switching times are:\nt1 = %f, t2 = %f, t3 = %f\n", t1, t2, T);
 fprintf("Specify end point is:\nx1_end = %f, x2_end = %f, x3_end = %f\n\n", x(end, :));
+fprintf("Transition time = %f\n\n", calculate_transition_time(t, x));
