@@ -5,17 +5,12 @@ function transitionTime = calculate_transition_time(t, x)
 %@return max transition time scalar 
 
 pointsAmount = size(x, 1);
-stateVariabelsAmount = 3;
-
-transitionTime = [t(end), t(end), t(end)];
-for variableNumber = 1:stateVariabelsAmount
-    for i = pointsAmount : -1 : 1
-        if abs(x(i, variableNumber)) > 0.05*10
-            transitionTime(variableNumber) = t(i);
-            break;
-        end
-    end
+transitionTime = t(end);
+for i = pointsAmount : -1 : 1
+	if abs(x(i,3)) > 0.05*10
+        transitionTime = t(i);
+        break;
+	end
 end
-transitionTime = max(transitionTime);
 end
 
