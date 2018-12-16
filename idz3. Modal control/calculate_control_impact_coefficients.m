@@ -4,8 +4,9 @@ function k = calculate_control_impact_coefficients(w0)
 %@param w0 - base frequency scalar
 %@return control impact coefficient vector with size (3, 1)
 
-global A B POLY_TYPE SYSTEM_DEGREE
-a = get_poly_coefficients(SYSTEM_DEGREE, POLY_TYPE);
+global A B
+% Polynomials that minimize the functional
+a = [1 2.15 1.75 1];
 
 %A1 = matrix derived from det(A(x)+B(x) - s*I)
 A1 = [0                          0                           1; ...             % s^2
